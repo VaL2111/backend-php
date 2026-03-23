@@ -7,7 +7,7 @@ if (!$link) {
 
 mysqli_select_db($link, "StolenCarsDB");
 
-$query = "SELECT * FROM cars";
+$query = "SELECT * FROM cars ORDER BY id DESC";
 
 $select_cars = mysqli_query($link, $query);
 
@@ -20,6 +20,7 @@ if ($select_cars) {
             <th>Номер</th>
             <th>Марка</th>
             <th>Стан</th>
+            <th>Дія</th>
           </tr>";
 
     while ($car = mysqli_fetch_array($select_cars)) {
@@ -28,6 +29,10 @@ if ($select_cars) {
         echo "<td><a href='car_owner.php?car_id=" . $car['id'] . "'>" . $car['car_number'] . "</a></td>";
         echo "<td>", $car['brand'], "</td>";
         echo "<td>", $car['status'], "</td>";
+        echo "<td>
+                <a href='edit_car.php?car_id=" . $car['id'] . "'>Редагувати</a>
+                <a href='delete_car.php?car_id=" . $car['id'] . "' onclick=\"return confirm('Ви впевнені, що хочете видалити цей автомобіль та інформацію про власника?');\">Видалити</a>
+              </td>";
         echo "</tr>";
     }
 
