@@ -1,0 +1,37 @@
+<?php
+$link = mysqli_connect('localhost', 'admin', 'admin');
+
+if (!$link) {
+    die("Помилка підключення: " . mysqli_connect_error());
+}
+
+mysqli_select_db($link, "StolenCarsDB");
+
+$query = "SELECT * FROM cars";
+
+$select_cars = mysqli_query($link, $query);
+
+if ($select_cars) {
+    echo "<h2>Список автомобілів:</h2>";
+
+    echo "<table border='1' cellpadding='8' cellspacing='0'>";
+    echo "<tr>
+            <th>ID</th>
+            <th>Номер</th>
+            <th>Марка</th>
+            <th>Стан</th>
+          </tr>";
+
+    while ($car = mysqli_fetch_array($select_cars)) {
+        echo "<tr>";
+        echo "<td>", $car['id'], "</td>";
+        echo "<td><a href='car_owner.php?car_id=" . $car['id'] . "'>" . $car['car_number'] . "</a></td>";
+        echo "<td>", $car['brand'], "</td>";
+        echo "<td>", $car['status'], "</td>";
+        echo "</tr>";
+    }
+
+    echo "</table>";
+} else {
+    echo "Помилка виконання запиту: " . mysqli_error($link);
+}
