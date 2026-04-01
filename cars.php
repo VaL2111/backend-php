@@ -40,3 +40,8 @@ if ($select_cars) {
 } else {
     echo "Помилка виконання запиту: " . mysqli_error($link);
 }
+
+echo "<br><br><a href='owners.php'>Список власників</a>";
+echo "<br><br><a href='add_car.php'>Додати авто</a>";
+echo "<br><br><a href='infor.php'>Статистика БД</a>";
+echo "<br><br><a href='search.php'>Пошук</a>";

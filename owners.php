@@ -33,3 +33,5 @@ if ($select_owners) {
 } else {
     echo "Помилка виконання запиту: " . mysqli_error($link);
 }
+
+echo "<br><br><a href='cars.php'>Повернення на головну сторінку</a>";
